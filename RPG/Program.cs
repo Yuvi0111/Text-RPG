@@ -118,7 +118,8 @@ namespace RPG
             Console.WriteLine("\nClass: " + Class);
 
             Console.Write("\n\n\nType character age: ");
-            mainChar.Age = Convert.ToInt16(Console.ReadLine();)
+            string Age = Console.ReadLine();
+            mainChar.Age = Convert.ToInt16(Age);
         }
 
         private static void Load()
