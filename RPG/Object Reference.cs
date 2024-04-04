@@ -1,9 +1,17 @@
 ﻿using System;
 
-public class Class1
+public class CharacterInfo
 {
-	public Class1()
-	{
-	
-	}
+    public string Name { get; set; }
+	public string Class { get; set; }
+    public int Age { get; set; }
+    public string Sex { get; set; }
+
 }
+
+public class Loops
+{
+    public bool validInput = false;
+}
+
+
