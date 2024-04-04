@@ -17,25 +17,26 @@ namespace RPG
                     "2. Load \n" +
                     "3. Settings \n" +
                     "4. Exit \n" +
-                    "Hint: Press any numbers such as \"1\", \"2\", \"3\" etc for input... " +
+                    "Hint: Press any numbers such as \"1\", \"2\", \"3\" etc for input THROUGHOUT the game... " +
                     "\n");
-                ConsoleKeyInfo menuInput = Console.ReadKey();
-                switch (menuInput.Key)
+                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
+                switch (consoleKeyInfo.Key)
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
-                        CharacterCreation();
                         loops.validInput = true;
+                        CharacterCreation();
+                        
                         break;
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
-                        Load();
                         loops.validInput = true;
+                        Load();
                         break;
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
-                        Settings();
                         loops.validInput = true;
+                        Settings();
                         break;
                     case ConsoleKey.D4:
                     case ConsoleKey.NumPad4:
@@ -43,7 +44,7 @@ namespace RPG
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Wrong Input, are you sure you are hitting the right number keys?");
+                        Console.WriteLine("Wrong input, are you sure you are hitting the right number keys?");
                         break;
                 }
 
@@ -58,21 +59,66 @@ namespace RPG
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Blue;
             
-            CharacterInfo mainChar = new CharacterInfo();
+            CharacterInfo mainChar = new CharacterInfo(); 
+            Class charClass = new Class();
+            
             Console.WriteLine("Create your character: \n" +
                 "\n" +
                 "\n");
             Console.Write("Name: ");
             mainChar.Name = Console.ReadLine();
-            Console.WriteLine("Class: 1. Barbarian \n" +
-                "The strong embrace the wild that hides inside - keen instincts, primal physicality, and most of all, an unbridled, unquenchable rage. \n \n \n" +
-                "2. Cleric \n" +
-                "Clerics are representatives of the gods they worship, wielding potent divine magic for good or ill. \n \n \n" +
-                "3. Rogue \n" +
-                "With stealth, skill and uncanny reflexes, a rogue's versatility lets them get the upper hand in almost any situation. \n \n \n" +
-                "4. Wizard \n" +
-                "Wizards master the arcane by specialising in individual schools of magic, combining ancient spells with modern research. \n \n \n");
 
+            Console.WriteLine(" \n \n \nClasses: 1. Fighter \n" +
+               "Fighters have mastered the art of combat, wielding weapons with unmatched skill and wearing armour like a second skin. \n \n \n" +
+               "2. Cleric \n" +
+               "Clerics are representatives of the gods they worship, wielding potent divine magic for good or ill. \n \n \n" +
+               "3. Rogue \n" +
+               "With stealth, skill and uncanny reflexes, a rogue's versatility lets them get the upper hand in almost any situation. \n \n \n" +
+               "4. Wizard \n" +
+               "Wizards master the arcane by specialising in individual schools of magic, combining ancient spells with modern research. \n \n \n");
+
+            string Class = null;
+            Loops loops = new Loops();
+            while (loops.validInput == false)
+            {
+                Console.Write("Choose an option: ");
+                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
+                switch (consoleKeyInfo.Key) 
+                {
+                    case ConsoleKey.D1:
+                    case ConsoleKey.NumPad1:
+                        mainChar.Class = charClass.Fighter; 
+                        Class = "Fighter";
+                        loops.validInput = true;
+                        break;
+                    case ConsoleKey.D2: 
+                    case ConsoleKey.NumPad2:
+                        mainChar.Class = charClass.Cleric;
+                        Class = "Cleric";
+                        loops.validInput = true;
+                        break;
+                    case ConsoleKey.D3:
+                    case ConsoleKey.NumPad3:
+                        mainChar.Class = charClass.Rogue;
+                        Class = "Rogue";
+                        loops.validInput = true;
+                        break;
+                    case ConsoleKey.D4:
+                    case ConsoleKey.NumPad4:
+                        mainChar.Class = charClass.Wizard;
+                        Class = "Wizard";
+                        loops.validInput = true;
+                        break;
+                    default:
+                        Console.WriteLine("Wrong input, are you sure you are hitting the right number keys?");
+                        break;
+                }
+                
+           }
+            Console.WriteLine("\nClass: " + Class);
+
+            Console.Write("\n\n\nType character age: ");
+            mainChar.Age = Convert.ToInt16(Console.ReadLine();)
         }
 
         private static void Load()
