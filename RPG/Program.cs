@@ -1,4 +1,5 @@
 ﻿using System.Drawing.Printing;
+using System.Net.Cache;
 
 namespace RPG
 {
@@ -25,8 +26,7 @@ namespace RPG
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
                         loops.validInput = true;
-                        CharacterCreation();
-                        
+                        CharacterCreationNameClass();
                         break;
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
@@ -54,7 +54,7 @@ namespace RPG
             
         
 
-        public static void CharacterCreation()
+        public static void CharacterCreationNameClass()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -110,17 +110,41 @@ namespace RPG
                         loops.validInput = true;
                         break;
                     default:
-                        Console.WriteLine("Wrong input, are you sure you are hitting the right number keys?");
+                        Console.WriteLine(" Wrong input, are you sure you are hitting the right number keys?");
                         break;
                 }
                 
            }
             Console.WriteLine("\nClass: " + Class);
-
-            Console.Write("\n\n\nType character age: ");
-            string Age = Console.ReadLine();
-            mainChar.Age = Convert.ToInt16(Age);
+            CharacterCreationAge(mainChar);
         }
+
+        public static void CharacterCreationAge(CharacterInfo mainChar)
+        {
+            Loops loops = new Loops();
+            loops.validInput = false;
+            while (loops.validInput == false)
+            {
+                Console.Write("\n\n\nType character age: \n");
+                string Age = Console.ReadLine();
+                try
+                {
+                    mainChar.Age = Convert.ToInt16(Age);
+                }
+                catch (FormatException)
+                {
+                 Console.WriteLine("Please only use INTEGERS (1, 2, 3, 4 etc...) for age.");
+                }
+                finally
+                {
+                    CharacterCreationAge(mainChar);
+                }
+                switch (mainChar.Age)
+                {
+                }
+            }
+        }
+
 
         private static void Load()
         {
