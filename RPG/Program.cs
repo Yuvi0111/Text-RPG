@@ -1,4 +1,5 @@
 ﻿using System.Drawing.Printing;
+using System.Net.Cache;
 
 namespace RPG
 {
@@ -26,7 +27,6 @@ namespace RPG
                     case ConsoleKey.NumPad1:
                         loops.validInput = true;
                         CharacterCreation();
-                        
                         break;
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
@@ -50,24 +50,25 @@ namespace RPG
 
             }
         }
-           
-            
-        
+
+
+
 
         public static void CharacterCreation()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            
-            CharacterInfo mainChar = new CharacterInfo(); 
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            CharacterInfo mainChar = new CharacterInfo();
             Class charClass = new Class();
-            
+
             Console.WriteLine("Create your character: \n" +
                 "\n" +
                 "\n");
             Console.Write("Name: ");
             mainChar.Name = Console.ReadLine();
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(" \n \n \nClasses: 1. Fighter \n" +
                "Fighters have mastered the art of combat, wielding weapons with unmatched skill and wearing armour like a second skin. \n \n \n" +
                "2. Cleric \n" +
@@ -83,15 +84,15 @@ namespace RPG
             {
                 Console.Write("Choose an option: ");
                 ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
-                switch (consoleKeyInfo.Key) 
+                switch (consoleKeyInfo.Key)
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
-                        mainChar.Class = charClass.Fighter; 
+                        mainChar.Class = charClass.Fighter;
                         Class = "Fighter";
                         loops.validInput = true;
                         break;
-                    case ConsoleKey.D2: 
+                    case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
                         mainChar.Class = charClass.Cleric;
                         Class = "Cleric";
@@ -110,18 +111,54 @@ namespace RPG
                         loops.validInput = true;
                         break;
                     default:
-                        Console.WriteLine("Wrong input, are you sure you are hitting the right number keys?");
+                        Console.WriteLine(" Wrong input, are you sure you are hitting the right number keys?");
                         break;
                 }
-                
-           }
+
+            }
             Console.WriteLine("\nClass: " + Class);
+            
+            loops.validInput = false;
+            while (loops.validInput == false)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("\n\n\nType character age:");
+                string Age = Console.ReadLine();
+                try
+                {
+                    mainChar.Age = Convert.ToInt16(Age);
+                }
+                catch (FormatException)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\nERROR ENCOUNTERED: Invalid format, only use INTEGERS (1, 2, 3 etc...) for age.");
+                }
+                catch (OverflowException)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\nERROR ENCOUNTERED: The age is absurdly big. Follow the guideline in the message below.");
+                }
+                finally
+                {
+                }
+                switch (mainChar.Age)
+                {
+                    case < 18:
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\nERROR ENCOUNTERED: The age needs to be in the range 18 years - 110 years");
+                        break;
+                    case > 100:
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\nERROR ENCOUNTERED: The age needs to be in the range 18 years - 110 years");
+                        break;
+                    default:
+                        loops.validInput = true;
+                        break;
+                }
+            }
+            
 
-            Console.Write("\n\n\nType character age: ");
-            string Age = Console.ReadLine();
-            mainChar.Age = Convert.ToInt16(Age);
         }
-
         private static void Load()
         {
             Console.Clear();
