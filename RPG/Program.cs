@@ -156,7 +156,20 @@ namespace RPG
                         break;
                 }
             }
-            
+
+            Console.WriteLine("""
+            Sex: 1. Male
+                 2. Female
+            """);
+            ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
+            switch (consoleKeyInfo.Key)
+            {
+                case ConsoleKey.D1:
+                case ConsoleKey.NumPad1:
+                    mainChar.Sex =
+                    break;
+            }
+
 
         }
         private static void Load()

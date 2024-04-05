@@ -6,7 +6,6 @@ public class CharacterInfo
 	public string Class { get; set; }
     public int Age { get; set; }
     public string Sex { get; set; }
-
 }
 public class Class
 {
@@ -15,9 +14,6 @@ public class Class
     public string Cleric { get; set; }
     public string Fighter { get; set; }
 }
-public class Loops
-{
-    public bool validInput = false;
-}
+
 
 
