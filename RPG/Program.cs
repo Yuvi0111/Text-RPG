@@ -20,8 +20,8 @@ namespace RPG
                     "4. Exit \n" +
                     "Hint: Press any numbers such as \"1\", \"2\", \"3\" etc for input THROUGHOUT the game... " +
                     "\n");
-                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
-                switch (consoleKeyInfo.Key)
+                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(); //ConsoleKeyInfo is the data type that stores the key pressed by the user, consoleKeyInfo is the variable of that datatype, Console.ReadKey(); reads the user's input
+                switch (consoleKeyInfo.Key) // ".Key" retrieves the key pressed by the user
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
@@ -111,7 +111,7 @@ namespace RPG
                         loops.validInput = true;
                         break;
                     default:
-                        Console.WriteLine(" Wrong input, are you sure you are hitting the right number keys?");
+                        Console.WriteLine(" ERROR ENCOUNTERED: Wrong input, are you sure you are hitting the right number keys?");
                         break;
                 }
 
@@ -121,7 +121,7 @@ namespace RPG
             loops.validInput = false;
             while (loops.validInput == false)
             {
-                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.ForegroundColor = ConsoleColor.Magenta; //Ensure Text colour is changed if it loops due to wrong input
                 Console.Write("\n\n\nType character age:");
                 string Age = Console.ReadLine();
                 try
@@ -136,7 +136,7 @@ namespace RPG
                 catch (OverflowException)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("\nERROR ENCOUNTERED: The age is absurdly big. Follow the guideline in the message below.");
+                    Console.WriteLine("\nERROR ENCOUNTERED: The age is absurdly big. Follow the guideline in the message below."); //If the number is too big, the meessage on line 152 or line 148 will show up as well.
                 }
                 finally
                 {
@@ -156,21 +156,43 @@ namespace RPG
                         break;
                 }
             }
-
+            
+            
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("""
             Sex: 1. Male
                  2. Female
             """);
-            ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
-            switch (consoleKeyInfo.Key)
+            
+            loops.validInput = false;
+
+            while (loops.validInput == false)
             {
-                case ConsoleKey.D1:
-                case ConsoleKey.NumPad1:
-                    mainChar.Sex =
-                    break;
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("");
+                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
+                switch (consoleKeyInfo.Key)
+                {
+                    case ConsoleKey.D1:
+                    case ConsoleKey.NumPad1:
+                        mainChar.Sex = "Male";
+                        loops.validInput = true;
+                        break;
+                    case ConsoleKey.D2:
+                    case ConsoleKey.NumPad2:
+                        mainChar.Sex = "Female";
+                        loops.validInput = true;
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("ERROR ENCOUNTERED: Wrong input, are you sure you are hitting the right number keys?");
+                        break;
+                }   
             }
-
-
+            Console.WriteLine("Character Sex: " + mainChar.Sex);
+            
+            
+            mainChar.Occupation = "MC"; //Hard coded main character occupation
         }
         private static void Load()
         {
@@ -190,7 +212,7 @@ namespace RPG
             Console.ForegroundColor= ConsoleColor.DarkRed;
             Console.WriteLine("Hope you had a fun time, come back again. " +
                 "Press Enter to exit \n \n \n \n \n \n");
-            while (Console.ReadKey().Key != ConsoleKey.Enter)
+            while (Console.ReadKey().Key != ConsoleKey.Enter) //Unless the key read by Console.ReadKey() is not enter, the program will run in a loop and not close
             {
                 Console.Clear();
                 Console.WriteLine("You need to press the ENTER key to exit the game, \n" +
@@ -202,7 +224,7 @@ namespace RPG
     }   
 }
 // TODO:
-// 1. Create a Character Creation Screen
+// 1. Create a Character Creation Screen (COMPLETED)
 // 2. Create the settings Menu
 // 3. Add a starting point
 // 4. Refine Exitting the program (COMPLETED)
