@@ -57,7 +57,7 @@ namespace RPG
         public static void CharacterCreationNameClass()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Green;
             
             CharacterInfo mainChar = new CharacterInfo(); 
             Class charClass = new Class();
@@ -68,6 +68,7 @@ namespace RPG
             Console.Write("Name: ");
             mainChar.Name = Console.ReadLine();
 
+            Console.ForegroundColor= ConsoleColor.Yellow;
             Console.WriteLine(" \n \n \nClasses: 1. Fighter \n" +
                "Fighters have mastered the art of combat, wielding weapons with unmatched skill and wearing armour like a second skin. \n \n \n" +
                "2. Cleric \n" +
@@ -114,18 +115,19 @@ namespace RPG
                         break;
                 }
                 
-           }
+            }
             Console.WriteLine("\nClass: " + Class);
             CharacterCreationAge(mainChar);
         }
 
         public static void CharacterCreationAge(CharacterInfo mainChar)
-        {
+        {      
             Loops loops = new Loops();
             loops.validInput = false;
             while (loops.validInput == false)
             {
-                Console.Write("\n\n\nType character age: \n");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("\n\n\nType character age:");
                 string Age = Console.ReadLine();
                 try
                 {
@@ -133,16 +135,33 @@ namespace RPG
                 }
                 catch (FormatException)
                 {
-                 Console.WriteLine("Please only use INTEGERS (1, 2, 3, 4 etc...) for age.");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\nERROR ENCOUNTERED: Invalid format, only use INTEGERS (1, 2, 3 etc...) for age.");
+                }
+                catch (OverflowException) 
+                {
+                    Console.ForegroundColor= ConsoleColor.DarkRed;
+                    Console.WriteLine("\nERROR ENCOUNTERED: The age is absurdly big. Follow the guideline in the message below.");
                 }
                 finally
                 {
-                    CharacterCreationAge(mainChar);
                 }
                 switch (mainChar.Age)
                 {
-                }
+                    case <18:
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\nERROR ENCOUNTERED: The age needs to be in the range 18 years - 110 years");
+                        break;
+                    case >100:
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\nERROR ENCOUNTERED: The age needs to be in the range 18 years - 110 years");
+                        break;
+                    default:
+                        loops.validInput = true;
+                        break;
+                }               
             }
+            Console.WriteLine("\n" + mainChar.Age);
         }
 
 
