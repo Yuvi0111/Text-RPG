@@ -16,8 +16,7 @@ namespace RPG
                     "\n" +
                     "1. Create a character \n" +
                     "2. Load \n" +
-                    "3. Settings \n" +
-                    "4. Exit \n" +
+                    "3. Exit \n" +
                     "Hint: Press any numbers such as \"1\", \"2\", \"3\" etc for input THROUGHOUT the game... " +
                     "\n");
                 ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(); //ConsoleKeyInfo is the data type that stores the key pressed by the user, consoleKeyInfo is the variable of that datatype, Console.ReadKey(); reads the user's input
@@ -35,11 +34,6 @@ namespace RPG
                         break;
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
-                        loops.validInput = true;
-                        Settings();
-                        break;
-                    case ConsoleKey.D4:
-                    case ConsoleKey.NumPad4:
                         Exit();
                         break;
                     default:
@@ -51,7 +45,10 @@ namespace RPG
             }
         }
 
+        public static void Game()
+        {
 
+        }
 
 
         public static void CharacterCreation()
@@ -199,13 +196,6 @@ namespace RPG
             Console.Clear();
 
         }
-
-        private static void Settings() 
-        {
-            Console.Clear();
-
-        }
-
         private static void Exit()
         {
             Console.Clear();
@@ -225,6 +215,6 @@ namespace RPG
 }
 // TODO:
 // 1. Create a Character Creation Screen (COMPLETED)
-// 2. Create the settings Menu
+// 2. Create the settings Menu (FEATURE REMOVED)
 // 3. Add a starting point
 // 4. Refine Exitting the program (COMPLETED)
